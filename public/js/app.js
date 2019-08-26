@@ -2147,6 +2147,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -2226,7 +2227,7 @@ __webpack_require__.r(__webpack_exports__);
         $('#addNew').modal('hide');
         toast.fire({
           type: 'success',
-          title: 'Orderdetail Created successfully'
+          title: 'Order Detail Created successfully'
         });
 
         _this4.$Progress.finish();
@@ -2953,20 +2954,11 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
       editMode: false,
-      products: {},
+      supplierproducts: {},
       form: new Form({
         name: '',
         description: '',
@@ -2975,12 +2967,12 @@ __webpack_require__.r(__webpack_exports__);
     };
   },
   methods: {
-    updateProduct: function updateProduct() {
+    updateSupplierproduct: function updateSupplierproduct() {
       var _this = this;
 
       this.$Progress.start(); //console.log('Editing data');
 
-      this.form.put('api/product/' + this.form.id).then(function () {
+      this.form.put('api/supplierproduct/' + this.form.id).then(function () {
         //success
         $('#addNew').modal('hide');
         Swal.fire('Updated!', 'Information has been updated.', 'success');
@@ -3002,7 +2994,7 @@ __webpack_require__.r(__webpack_exports__);
       this.form.reset();
       $('#addNew').modal('show');
     },
-    deleteProduct: function deleteProduct(id) {
+    deleteSupplierproduct: function deleteSupplierproduct(id) {
       var _this2 = this;
 
       Swal.fire({
@@ -3016,7 +3008,7 @@ __webpack_require__.r(__webpack_exports__);
       }).then(function (result) {
         //send request to the serve
         if (result.value) {
-          _this2.form["delete"]('api/product/' + id).then(function () {
+          _this2.form["delete"]('api/supplierproduct/' + id).then(function () {
             Swal.fire('Deleted!', 'Your file has been deleted.', 'success');
             Fire.$emit('AfterCreate');
           })["catch"](function () {
@@ -3025,24 +3017,24 @@ __webpack_require__.r(__webpack_exports__);
         }
       });
     },
-    loadProducts: function loadProducts() {
+    loadSupplierproducts: function loadSupplierproducts() {
       var _this3 = this;
 
-      axios.get('api/product').then(function (_ref) {
+      axios.get('api/supplierproduct').then(function (_ref) {
         var data = _ref.data;
-        return _this3.products = data.data;
+        return _this3.supplierproducts = data.data;
       });
     },
-    createProduct: function createProduct() {
+    createSupplierproduct: function createSupplierproduct() {
       var _this4 = this;
 
       this.$Progress.start();
-      this.form.post('api/product').then(function () {
+      this.form.post('api/supplierproduct').then(function () {
         Fire.$emit('AfterCreate');
         $('#addNew').modal('hide');
         toast.fire({
           type: 'success',
-          title: 'Product Created successfully'
+          title: 'Supplier Product Created successfully'
         });
 
         _this4.$Progress.finish();
@@ -3052,9 +3044,9 @@ __webpack_require__.r(__webpack_exports__);
   created: function created() {
     var _this5 = this;
 
-    this.loadProducts();
+    this.loadSupplierproducts();
     Fire.$on('AfterCreate', function () {
-      _this5.loadProducts();
+      _this5.loadSupplierproducts();
     }); //setInterval(() => this.loadUsers(), 3000);
   }
 });
@@ -90545,7 +90537,7 @@ var render = function() {
                 { staticClass: "btn btn-success", on: { click: _vm.newModal } },
                 [
                   _vm._v("Add Orders \n                  "),
-                  _c("i", { staticClass: "fas fa-car fa-fw" })
+                  _c("i", { staticClass: "fas fa-cart-plus fa-fw" })
                 ]
               )
             ])
@@ -90829,7 +90821,7 @@ var render = function() {
         _c("div", { staticClass: "card" }, [
           _c("div", { staticClass: "card-header" }, [
             _c("h3", { staticClass: "card-title" }, [
-              _vm._v("Orderdetails Table")
+              _vm._v("Order Details Table")
             ]),
             _vm._v(" "),
             _c("div", { staticClass: "card-tools" }, [
@@ -90837,8 +90829,8 @@ var render = function() {
                 "button",
                 { staticClass: "btn btn-success", on: { click: _vm.newModal } },
                 [
-                  _vm._v("Add Orderdetails \n                  "),
-                  _c("i", { staticClass: "fas fa-car fa-fw" })
+                  _vm._v("Add Order Details \n                  "),
+                  _c("i", { staticClass: "fas fa-cash-register fa-fw" })
                 ]
               )
             ])
@@ -90933,7 +90925,7 @@ var render = function() {
                     staticClass: "modal-title",
                     attrs: { id: "addNew" }
                   },
-                  [_vm._v("Add New orderdetail")]
+                  [_vm._v("Add New Order Detail")]
                 ),
                 _vm._v(" "),
                 _c(
@@ -90950,7 +90942,7 @@ var render = function() {
                     staticClass: "modal-title",
                     attrs: { id: "addNew" }
                   },
-                  [_vm._v("Update Orderdetail's Info")]
+                  [_vm._v("Update Order Detail's Info")]
                 ),
                 _vm._v(" "),
                 _vm._m(1)
@@ -90990,7 +90982,7 @@ var render = function() {
                           attrs: {
                             type: "text",
                             name: "order_id",
-                            placeholder: "Order ID"
+                            placeholder: "Order id"
                           },
                           domProps: { value: _vm.form.order_id },
                           on: {
@@ -91120,9 +91112,9 @@ var staticRenderFns = [
     return _c("tr", [
       _c("th", [_vm._v("ID")]),
       _vm._v(" "),
-      _c("th", [_vm._v("Supplier ID")]),
+      _c("th", [_vm._v("Order ID")]),
       _vm._v(" "),
-      _c("th", [_vm._v("Orderdetail ID")]),
+      _c("th", [_vm._v("Product ID")]),
       _vm._v(" "),
       _c("th", [_vm._v("Modify")])
     ])
@@ -91179,7 +91171,7 @@ var render = function() {
                 { staticClass: "btn btn-success", on: { click: _vm.newModal } },
                 [
                   _vm._v("Add Products \n                  "),
-                  _c("i", { staticClass: "fas fa-car fa-fw" })
+                  _c("i", { staticClass: "fas fa-folder-open fa-fw" })
                 ]
               )
             ])
@@ -91923,7 +91915,7 @@ var render = function() {
                 { staticClass: "btn btn-success", on: { click: _vm.newModal } },
                 [
                   _vm._v("Add Suppliers \n                  "),
-                  _c("i", { staticClass: "fas fa-car fa-fw" })
+                  _c("i", { staticClass: "fas fa-users fa-fw" })
                 ]
               )
             ])
@@ -92200,15 +92192,17 @@ var render = function() {
       _c("div", { staticClass: "col-md-12" }, [
         _c("div", { staticClass: "card" }, [
           _c("div", { staticClass: "card-header" }, [
-            _c("h3", { staticClass: "card-title" }, [_vm._v("Products Table")]),
+            _c("h3", { staticClass: "card-title" }, [
+              _vm._v("Supplier Products Table")
+            ]),
             _vm._v(" "),
             _c("div", { staticClass: "card-tools" }, [
               _c(
                 "button",
                 { staticClass: "btn btn-success", on: { click: _vm.newModal } },
                 [
-                  _vm._v("Add Products \n                  "),
-                  _c("i", { staticClass: "fas fa-car fa-fw" })
+                  _vm._v("Add Supplier Products \n                  "),
+                  _c("i", { staticClass: "fas fa-dumpster fa-fw" })
                 ]
               )
             ])
@@ -92221,15 +92215,13 @@ var render = function() {
                 [
                   _vm._m(0),
                   _vm._v(" "),
-                  _vm._l(_vm.products, function(product) {
-                    return _c("tr", { key: product.id }, [
-                      _c("td", [_vm._v(_vm._s(product.id))]),
+                  _vm._l(_vm.supplierproducts, function(supplierproduct) {
+                    return _c("tr", { key: supplierproduct.id }, [
+                      _c("td", [_vm._v(_vm._s(supplierproduct.id))]),
                       _vm._v(" "),
-                      _c("td", [_vm._v(_vm._s(product.name))]),
+                      _c("td", [_vm._v(_vm._s(supplierproduct.name))]),
                       _vm._v(" "),
-                      _c("td", [_vm._v(_vm._s(product.description))]),
-                      _vm._v(" "),
-                      _c("td", [_vm._v(_vm._s(product.quantity))]),
+                      _c("td", [_vm._v(_vm._s(supplierproduct.description))]),
                       _vm._v(" "),
                       _c("td", [
                         _c(
@@ -92238,7 +92230,7 @@ var render = function() {
                             attrs: { href: "#" },
                             on: {
                               click: function($event) {
-                                return _vm.editModal(product)
+                                return _vm.editModal(supplierproduct)
                               }
                             }
                           },
@@ -92251,7 +92243,9 @@ var render = function() {
                             attrs: { href: "#" },
                             on: {
                               click: function($event) {
-                                return _vm.deleteProduct(product.id)
+                                return _vm.deleteSupplierproduct(
+                                  supplierproduct.id
+                                )
                               }
                             }
                           },
@@ -92305,7 +92299,7 @@ var render = function() {
                     staticClass: "modal-title",
                     attrs: { id: "addNew" }
                   },
-                  [_vm._v("Add New Product")]
+                  [_vm._v("Add New Supplier Product")]
                 ),
                 _vm._v(" "),
                 _c(
@@ -92322,7 +92316,7 @@ var render = function() {
                     staticClass: "modal-title",
                     attrs: { id: "addNew" }
                   },
-                  [_vm._v("Update product's Info")]
+                  [_vm._v("Update Supplier Product's Info")]
                 ),
                 _vm._v(" "),
                 _vm._m(1)
@@ -92334,7 +92328,9 @@ var render = function() {
                   on: {
                     submit: function($event) {
                       $event.preventDefault()
-                      _vm.editMode ? _vm.updateProduct() : _vm.createProduct()
+                      _vm.editMode
+                        ? _vm.updateSupplierproduct()
+                        : _vm.createSupplierproduct()
                     }
                   }
                 },
@@ -92349,30 +92345,36 @@ var render = function() {
                             {
                               name: "model",
                               rawName: "v-model",
-                              value: _vm.form.name,
-                              expression: "form.name"
+                              value: _vm.form.order_id,
+                              expression: "form.order_id"
                             }
                           ],
                           staticClass: "form-control",
-                          class: { "is-invalid": _vm.form.errors.has("name") },
+                          class: {
+                            "is-invalid": _vm.form.errors.has("order_id")
+                          },
                           attrs: {
                             type: "text",
-                            name: "name",
-                            placeholder: "Name"
+                            name: "order_id",
+                            placeholder: "Order id"
                           },
-                          domProps: { value: _vm.form.name },
+                          domProps: { value: _vm.form.order_id },
                           on: {
                             input: function($event) {
                               if ($event.target.composing) {
                                 return
                               }
-                              _vm.$set(_vm.form, "name", $event.target.value)
+                              _vm.$set(
+                                _vm.form,
+                                "order_id",
+                                $event.target.value
+                              )
                             }
                           }
                         }),
                         _vm._v(" "),
                         _c("has-error", {
-                          attrs: { form: _vm.form, field: "name" }
+                          attrs: { form: _vm.form, field: "order_id" }
                         })
                       ],
                       1
@@ -92387,20 +92389,20 @@ var render = function() {
                             {
                               name: "model",
                               rawName: "v-model",
-                              value: _vm.form.description,
-                              expression: "form.description"
+                              value: _vm.form.product_id,
+                              expression: "form.product_id"
                             }
                           ],
                           staticClass: "form-control",
                           class: {
-                            "is-invalid": _vm.form.errors.has("description")
+                            "is-invalid": _vm.form.errors.has("product_id")
                           },
                           attrs: {
                             type: "text",
-                            name: "description",
-                            placeholder: "Description"
+                            name: "product_id",
+                            placeholder: "Product ID"
                           },
-                          domProps: { value: _vm.form.description },
+                          domProps: { value: _vm.form.product_id },
                           on: {
                             input: function($event) {
                               if ($event.target.composing) {
@@ -92408,7 +92410,7 @@ var render = function() {
                               }
                               _vm.$set(
                                 _vm.form,
-                                "description",
+                                "product_id",
                                 $event.target.value
                               )
                             }
@@ -92416,51 +92418,7 @@ var render = function() {
                         }),
                         _vm._v(" "),
                         _c("has-error", {
-                          attrs: { form: _vm.form, field: "description" }
-                        })
-                      ],
-                      1
-                    ),
-                    _vm._v(" "),
-                    _c(
-                      "div",
-                      { staticClass: "form-group" },
-                      [
-                        _c("input", {
-                          directives: [
-                            {
-                              name: "model",
-                              rawName: "v-model",
-                              value: _vm.form.quantity,
-                              expression: "form.quantity"
-                            }
-                          ],
-                          staticClass: "form-control",
-                          class: {
-                            "is-invalid": _vm.form.errors.has("quantity")
-                          },
-                          attrs: {
-                            type: "text",
-                            name: "quantity",
-                            placeholder: "Quantity"
-                          },
-                          domProps: { value: _vm.form.quantity },
-                          on: {
-                            input: function($event) {
-                              if ($event.target.composing) {
-                                return
-                              }
-                              _vm.$set(
-                                _vm.form,
-                                "quantity",
-                                $event.target.value
-                              )
-                            }
-                          }
-                        }),
-                        _vm._v(" "),
-                        _c("has-error", {
-                          attrs: { form: _vm.form, field: "quantity" }
+                          attrs: { form: _vm.form, field: "product_id" }
                         })
                       ],
                       1
@@ -92528,11 +92486,9 @@ var staticRenderFns = [
     return _c("tr", [
       _c("th", [_vm._v("ID")]),
       _vm._v(" "),
-      _c("th", [_vm._v("Name")]),
+      _c("th", [_vm._v("Order ID")]),
       _vm._v(" "),
-      _c("th", [_vm._v("Description")]),
-      _vm._v(" "),
-      _c("th", [_vm._v("Quantity")]),
+      _c("th", [_vm._v("Product ID")]),
       _vm._v(" "),
       _c("th", [_vm._v("Modify")])
     ])

@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateSupplierProductsTable extends Migration
+class CreateOrderdetailsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,10 +13,10 @@ class CreateSupplierProductsTable extends Migration
      */
     public function up()
     {
-        Schema::create('supplier_products', function (Blueprint $table) {
+        Schema::create('orderdetails', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->integer('supply_id');
-            $table->integer('product_id');
+            $table->string('order_id');
+            $table->string('product_id');
             $table->timestamps();
             $table->softDeletes();
         });
@@ -29,6 +29,6 @@ class CreateSupplierProductsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('supplier_products');
+        Schema::dropIfExists('orderdetails');
     }
 }

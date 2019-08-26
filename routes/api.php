@@ -37,4 +37,4 @@ Route::apiResources(['orderdetail' => 'API\OrderdetailController' ]);
 Route::apiResources(['supplier' => 'API\SupplierController' ]);
 
 //Supplier Product routes 
-Route::apiResources(['supplierproduct' => 'API\SupplierproductController' ]);
+Route::apiResources(['supplierproduct' => 'API\SupplierProductController' ]);

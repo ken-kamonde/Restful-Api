@@ -1,12 +1,24 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\API;
 
-use App\SupplierProduct;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
+use App\supplierproduct;
+use Illuminate\Support\Facades\Hash;
 
-class SupplierProductController extends Controller
+class SupplierproductController extends Controller
 {
+    /**
+     * Create a new controller instance.
+     *
+     * @return void
+     */
+    public function __construct()
+    {
+        $this->middleware('auth:api');
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -14,7 +26,7 @@ class SupplierProductController extends Controller
      */
     public function index()
     {
-        //
+        return Supplierproduct::latest()->paginate(10);
     }
 
     /**
@@ -35,16 +47,24 @@ class SupplierProductController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $this->validate($request,[
+            'order_id' => 'required',
+            'product_id' => 'required'
+        ]);
+
+        return Supplierproduct::create([            
+            'order_id' => $request['order_id'],
+            'product_id' => $request['product_id']
+        ]);
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\SupplierProduct  $supplierProduct
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show(SupplierProduct $supplierProduct)
+    public function show($id)
     {
         //
     }
@@ -52,10 +72,10 @@ class SupplierProductController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\SupplierProduct  $supplierProduct
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit(SupplierProduct $supplierProduct)
+    public function edit($id)
     {
         //
     }
@@ -64,10 +84,10 @@ class SupplierProductController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\SupplierProduct  $supplierProduct
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, SupplierProduct $supplierProduct)
+    public function update(Request $request, $id)
     {
         //
     }
@@ -75,10 +95,10 @@ class SupplierProductController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\SupplierProduct  $supplierProduct
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(SupplierProduct $supplierProduct)
+    public function destroy($id)
     {
         //
     }

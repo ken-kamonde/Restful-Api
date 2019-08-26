@@ -8,7 +8,7 @@
 
                 <div class="card-tools">
                     <button class="btn btn-success" @click="newModal">Add Suppliers 
-                      <i class="fas fa-car fa-fw"></i>
+                      <i class="fas fa-users fa-fw"></i>
                     </button>
                 </div>
               </div>

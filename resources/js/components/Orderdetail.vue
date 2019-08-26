@@ -4,11 +4,11 @@
           <div class="col-md-12">
             <div class="card">
               <div class="card-header">
-                <h3 class="card-title">Orderdetails Table</h3>
+                <h3 class="card-title">Order Details Table</h3>
 
                 <div class="card-tools">
-                    <button class="btn btn-success" @click="newModal">Add Orderdetails 
-                      <i class="fas fa-car fa-fw"></i>
+                    <button class="btn btn-success" @click="newModal">Add Order Details 
+                      <i class="fas fa-cash-register fa-fw"></i>
                     </button>
                 </div>
               </div>
@@ -16,10 +16,10 @@
               <div class="card-body table-responsive p-0">
                 <table class="table table-hover">
                   <tbody><tr>
-                    <th>ID</th>
-                    <th>Supplier ID</th>
-                    <th>Orderdetail ID</th>                                       
-                    <th>Modify</th>
+                    <th>ID</th>                    
+                    <th>Order ID</th>
+                    <th>Product ID</th>
+                    <th>Modify</th> 
                   </tr>
 
                   
@@ -50,8 +50,8 @@
           <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content">
               <div class="modal-header">
-                <h5 class="modal-title" v-show="!editMode" id="addNew">Add New orderdetail</h5>
-                <h5 class="modal-title" v-show="editMode" id="addNew">Update Orderdetail's Info</h5>
+                <h5 class="modal-title" v-show="!editMode" id="addNew">Add New Order Detail</h5>
+                <h5 class="modal-title" v-show="editMode" id="addNew">Update Order Detail's Info</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                   <span aria-hidden="true">&times;</span>
                 </button>
@@ -61,17 +61,18 @@
 
                 <div class="form-group">                
                     <input v-model="form.order_id" type="text" name="order_id"
-                      placeholder="Order ID"
+                      placeholder="Order id"
                       class="form-control" :class="{ 'is-invalid': form.errors.has('order_id') }">
                     <has-error :form="form" field="order_id"></has-error>
                 </div>
-       
+
                 <div class="form-group">                
                     <input v-model="form.product_id" type="text" name="product_id"
                       placeholder="Product ID"
                       class="form-control" :class="{ 'is-invalid': form.errors.has('product_id') }">
                     <has-error :form="form" field="product_id"></has-error>
                 </div>
+  
 
                 </div>
                 <div class="modal-footer">
@@ -92,10 +93,9 @@
           return{
             editMode: false,
             orderdetails : {},
-            form: new Form({ 
-              order_id: '',              
-              product_id: ''
-                                                        
+            form: new Form({              
+              order_id: '',  
+              product_id: '',                               
             })
           }
         },
@@ -174,7 +174,7 @@
 
                 toast.fire({
                   type: 'success',
-                  title: 'Orderdetail Created successfully'
+                  title: 'Order Detail Created successfully'
                 })
 
                 this.$Progress.finish(); 

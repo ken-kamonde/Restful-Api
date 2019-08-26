@@ -4,11 +4,11 @@
           <div class="col-md-12">
             <div class="card">
               <div class="card-header">
-                <h3 class="card-title">Products Table</h3>
+                <h3 class="card-title">Supplier Products Table</h3>
 
                 <div class="card-tools">
-                    <button class="btn btn-success" @click="newModal">Add Products 
-                      <i class="fas fa-car fa-fw"></i>
+                    <button class="btn btn-success" @click="newModal">Add Supplier Products 
+                      <i class="fas fa-dumpster fa-fw"></i>
                     </button>
                 </div>
               </div>
@@ -17,24 +17,22 @@
                 <table class="table table-hover">
                   <tbody><tr>
                     <th>ID</th>
-                    <th>Name</th>
-                    <th>Description</th>
-                    <th>Quantity</th>                    
+                    <th>Order ID</th>
+                    <th>Product ID</th>
                     <th>Modify</th>
                   </tr>
 
                   
-                  <tr v-for="product in products" :key="product.id"> 
-                    <td>{{product.id}}</td>
-                    <td>{{product.name}}</td>
-                    <td>{{product.description}}</td>
-                    <td>{{product.quantity}}</td>
+                  <tr v-for="supplierproduct in supplierproducts" :key="supplierproduct.id"> 
+                    <td>{{supplierproduct.id}}</td>
+                    <td>{{supplierproduct.name}}</td>
+                    <td>{{supplierproduct.description}}</td>
                     <td>
-                        <a href="#" @click="editModal(product)">
+                        <a href="#" @click="editModal(supplierproduct)">
                             <i class="fa fa-edit blue"></i>
                         </a>
                         /
-                        <a href="#" @click="deleteProduct(product.id)">
+                        <a href="#" @click="deleteSupplierproduct(supplierproduct.id)">
                             <i class="fa fa-trash red"></i>
                         </a>
                     </td>
@@ -52,35 +50,28 @@
           <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content">
               <div class="modal-header">
-                <h5 class="modal-title" v-show="!editMode" id="addNew">Add New Product</h5>
-                <h5 class="modal-title" v-show="editMode" id="addNew">Update product's Info</h5>
+                <h5 class="modal-title" v-show="!editMode" id="addNew">Add New Supplier Product</h5>
+                <h5 class="modal-title" v-show="editMode" id="addNew">Update Supplier Product's Info</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                   <span aria-hidden="true">&times;</span>
                 </button>
               </div>
-              <form @submit.prevent="editMode ? updateProduct(): createProduct()">
+              <form @submit.prevent="editMode ? updateSupplierproduct(): createSupplierproduct()">
                 <div class="modal-body">
 
                 <div class="form-group">                
-                    <input v-model="form.name" type="text" name="name"
-                      placeholder="Name"
-                      class="form-control" :class="{ 'is-invalid': form.errors.has('name') }">
-                    <has-error :form="form" field="name"></has-error>
+                    <input v-model="form.order_id" type="text" name="order_id"
+                      placeholder="Order id"
+                      class="form-control" :class="{ 'is-invalid': form.errors.has('order_id') }">
+                    <has-error :form="form" field="order_id"></has-error>
                 </div>
 
                 <div class="form-group">                
-                    <input v-model="form.description" type="text" name="description"
-                      placeholder="Description"
-                      class="form-control" :class="{ 'is-invalid': form.errors.has('description') }">
-                    <has-error :form="form" field="description"></has-error>
+                    <input v-model="form.product_id" type="text" name="product_id"
+                      placeholder="Product ID"
+                      class="form-control" :class="{ 'is-invalid': form.errors.has('product_id') }">
+                    <has-error :form="form" field="product_id"></has-error>
                 </div>
-
-                <div class="form-group">                
-                    <input v-model="form.quantity" type="text" name="quantity"
-                      placeholder="Quantity"
-                      class="form-control" :class="{ 'is-invalid': form.errors.has('quantity') }">
-                    <has-error :form="form" field="quantity"></has-error>
-                </div>        
 
                 </div>
                 <div class="modal-footer">
@@ -100,7 +91,7 @@
         data() {
           return{
             editMode: false,
-            products : {},
+            supplierproducts : {},
             form: new Form({              
               name: '',  
               description: '',
@@ -109,10 +100,10 @@
           }
         },
         methods: {
-          updateProduct(){
+          updateSupplierproduct(){
             this.$Progress.start();
             //console.log('Editing data');
-            this.form.put('api/product/'+this.form.id)
+            this.form.put('api/supplierproduct/'+this.form.id)
             .then(() =>{
               //success
               $('#addNew').modal('hide')
@@ -141,7 +132,7 @@
             $('#addNew').modal('show');
           },
 
-          deleteProduct(id){
+          deleteSupplierproduct(id){
               Swal.fire({
                 title: 'Are you sure?',
                 text: "You won't be able to revert this!",
@@ -154,7 +145,7 @@
 
                 //send request to the serve
                 if (result.value) {
-                    this.form.delete('api/product/'+id).then(()=>{                  
+                    this.form.delete('api/supplierproduct/'+id).then(()=>{                  
                         Swal.fire(
                           'Deleted!',
                           'Your file has been deleted.',
@@ -168,14 +159,14 @@
                 
               })
           },
-          loadProducts(){       
-            axios.get('api/product').then(({ data }) => (this.products = data.data));
+          loadSupplierproducts(){       
+            axios.get('api/supplierproduct').then(({ data }) => (this.supplierproducts = data.data));
           },
 
-          createProduct(){
+          createSupplierproduct(){
             this.$Progress.start();
 
-            this.form.post('api/product')
+            this.form.post('api/supplierproduct')
             .then(()=>{
                 Fire.$emit('AfterCreate');
 
@@ -183,7 +174,7 @@
 
                 toast.fire({
                   type: 'success',
-                  title: 'Product Created successfully'
+                  title: 'Supplier Product Created successfully'
                 })
 
                 this.$Progress.finish(); 
@@ -197,9 +188,9 @@
           }
         },
         created() {
-            this.loadProducts();
+            this.loadSupplierproducts();
             Fire.$on('AfterCreate',() => {
-              this.loadProducts();
+              this.loadSupplierproducts();
             })
             //setInterval(() => this.loadUsers(), 3000);
         }
