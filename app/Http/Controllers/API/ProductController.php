@@ -102,7 +102,7 @@ class ProductController extends Controller
         $product->update($request->all());
 
         return ['message' => 'Updated the product info'];
-    }
+    } 
 
     /**
      * Remove the specified resource from storage.
@@ -112,6 +112,10 @@ class ProductController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $product = Product::findOrFail($id);
+
+        $product->delete();
+
+        return ['message' => 'Product Deleted'];
     }
 }

@@ -88,6 +88,10 @@ class OrderController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $order = Order::findOrFail($id);
+
+        $order->delete();
+
+        return ['message' => 'Order Deleted'];
     }
 }

@@ -1959,71 +1959,66 @@ __webpack_require__.r(__webpack_exports__);
     };
   },
   methods: {
-    //   updateOrder(){
-    //     this.$Progress.start();
-    //     //console.log('Editing data');
-    //     this.form.put('api/order/'+this.form.id)
-    //     .then(() =>{
-    //       //success
-    //       $('#addNew').modal('hide')
-    //       Swal.fire(
-    //         'Updated!',
-    //         'Information has been updated.',
-    //         'success'
-    //       ) 
-    //       Fire.$emit('AfterCreate')
-    //       this.$Progress.finish();              
-    //     })
-    //     .catch(() =>{
-    //       this.$Progress.fail(); 
-    //     })
-    //   },
-    //   editModal(user){
-    //     this.editMode = true;
-    //     this.form.reset();
-    //     $('#addNew').modal('show');
-    //     this.form.fill(user);
-    //   },
+    updateOrder: function updateOrder() {
+      var _this = this;
+
+      this.$Progress.start(); //console.log('Editing data');
+
+      this.form.put('api/order/' + this.form.id).then(function () {
+        //success
+        $('#addNew').modal('hide');
+        Swal.fire('Updated!', 'Information has been updated.', 'success');
+        Fire.$emit('AfterCreate');
+
+        _this.$Progress.finish();
+      })["catch"](function () {
+        _this.$Progress.fail();
+      });
+    },
+    editModal: function editModal(user) {
+      this.editMode = true;
+      this.form.reset();
+      $('#addNew').modal('show');
+      this.form.fill(user);
+    },
     newModal: function newModal() {
       this.editMode = false;
       this.form.reset();
       $('#addNew').modal('show');
     },
-    //   deleteOrder(id){
-    //       Swal.fire({
-    //         title: 'Are you sure?',
-    //         text: "You won't be able to revert this!",
-    //         type: 'warning',
-    //         showCancelButton: true,
-    //         confirmButtonColor: '#3085d6',
-    //         cancelButtonColor: '#d33',
-    //         confirmButtonText: 'Yes, delete it!'
-    //         }).then((result) => {
-    //         //send request to the serve
-    //         if (result.value) {
-    //             this.form.delete('api/order/'+id).then(()=>{                  
-    //                 Swal.fire(
-    //                   'Deleted!',
-    //                   'Your file has been deleted.',
-    //                   'success'
-    //                 ) 
-    //               Fire.$emit('AfterCreate')                
-    //             }).catch(()=> {
-    //               Swal("Failed","There was something wrong.", "warning");
-    //             });
-    //         }
-    //       })
-    //   },
+    deleteOrder: function deleteOrder(id) {
+      var _this2 = this;
+
+      Swal.fire({
+        title: 'Are you sure?',
+        text: "You won't be able to revert this!",
+        type: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Yes, delete it!'
+      }).then(function (result) {
+        //send request to the serve
+        if (result.value) {
+          _this2.form["delete"]('api/order/' + id).then(function () {
+            Swal.fire('Deleted!', 'Your file has been deleted.', 'success');
+            Fire.$emit('AfterCreate');
+          })["catch"](function () {
+            Swal("Failed", "There was something wrong.", "warning");
+          });
+        }
+      });
+    },
     loadOrders: function loadOrders() {
-      var _this = this;
+      var _this3 = this;
 
       axios.get('api/order').then(function (_ref) {
         var data = _ref.data;
-        return _this.orders = data.data;
+        return _this3.orders = data.data;
       });
     },
     createOrder: function createOrder() {
-      var _this2 = this;
+      var _this4 = this;
 
       this.$Progress.start();
       this.form.post('api/order').then(function () {
@@ -2034,16 +2029,16 @@ __webpack_require__.r(__webpack_exports__);
           title: 'Order Created successfully'
         });
 
-        _this2.$Progress.finish();
+        _this4.$Progress.finish();
       })["catch"](function () {});
     }
   },
   created: function created() {
-    var _this3 = this;
+    var _this5 = this;
 
     this.loadOrders();
     Fire.$on('AfterCreate', function () {
-      _this3.loadOrders();
+      _this5.loadOrders();
     }); //setInterval(() => this.loadUsers(), 3000);
   }
 });
@@ -2960,9 +2955,8 @@ __webpack_require__.r(__webpack_exports__);
       editMode: false,
       supplierproducts: {},
       form: new Form({
-        name: '',
-        description: '',
-        quantity: ''
+        order_id: '',
+        product_id: ''
       })
     };
   },

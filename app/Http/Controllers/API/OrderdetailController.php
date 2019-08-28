@@ -100,6 +100,10 @@ class OrderdetailController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $orderdetail = Orderdetail::findOrFail($id);
+
+        $orderdetail->delete();
+
+        return ['message' => 'Orderdetail Deleted'];
     }
 }

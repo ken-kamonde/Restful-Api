@@ -58,28 +58,28 @@
               </div>
               <form @submit.prevent="editMode ? updateSupplierproduct(): createSupplierproduct()">
                 <div class="modal-body">
+                  <div class="form-group">                
+                      <input v-model="form.order_id" type="text" name="order_id"
+                        placeholder="Order id"
+                        class="form-control" :class="{ 'is-invalid': form.errors.has('order_id') }">
+                      <has-error :form="form" field="order_id"></has-error>
+                  </div>
 
-                <div class="form-group">                
-                    <input v-model="form.order_id" type="text" name="order_id"
-                      placeholder="Order id"
-                      class="form-control" :class="{ 'is-invalid': form.errors.has('order_id') }">
-                    <has-error :form="form" field="order_id"></has-error>
+                  <div class="form-group">                
+                      <input v-model="form.product_id" type="text" name="product_id"
+                        placeholder="Product ID"
+                        class="form-control" :class="{ 'is-invalid': form.errors.has('product_id') }">
+                      <has-error :form="form" field="product_id"></has-error>
+                  </div>
                 </div>
 
-                <div class="form-group">                
-                    <input v-model="form.product_id" type="text" name="product_id"
-                      placeholder="Product ID"
-                      class="form-control" :class="{ 'is-invalid': form.errors.has('product_id') }">
-                    <has-error :form="form" field="product_id"></has-error>
-                </div>
-
-                </div>
                 <div class="modal-footer">
-                <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
-                <button v-show="editMode" type="submit" class="btn btn-success">Update</button>
-                <button v-show="!editMode" type="submit" class="btn btn-primary">Create</button>
+                  <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                  <button v-show="editMode" type="submit" class="btn btn-success">Update</button>
+                  <button v-show="!editMode" type="submit" class="btn btn-primary">Create</button>
                 </div>
               </form>
+
             </div>
           </div>
         </div>
@@ -93,9 +93,8 @@
             editMode: false,
             supplierproducts : {},
             form: new Form({              
-              name: '',  
-              description: '',
-              quantity: '',                                
+              order_id: '',  
+              product_id: '',                               
             })
           }
         },

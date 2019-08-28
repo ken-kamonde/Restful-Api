@@ -90,65 +90,65 @@
           }
         },
         methods: {
-        //   updateOrder(){
-        //     this.$Progress.start();
-        //     //console.log('Editing data');
-        //     this.form.put('api/order/'+this.form.id)
-        //     .then(() =>{
-        //       //success
-        //       $('#addNew').modal('hide')
-        //       Swal.fire(
-        //         'Updated!',
-        //         'Information has been updated.',
-        //         'success'
-        //       ) 
-        //       Fire.$emit('AfterCreate')
-        //       this.$Progress.finish();              
+          updateOrder(){
+            this.$Progress.start();
+            //console.log('Editing data');
+            this.form.put('api/order/'+this.form.id)
+            .then(() =>{
+              //success
+              $('#addNew').modal('hide')
+              Swal.fire(
+                'Updated!',
+                'Information has been updated.',
+                'success'
+              ) 
+              Fire.$emit('AfterCreate')
+              this.$Progress.finish();              
 
-        //     })
-        //     .catch(() =>{
-        //       this.$Progress.fail(); 
-        //     })
-        //   },
-        //   editModal(user){
-        //     this.editMode = true;
-        //     this.form.reset();
-        //     $('#addNew').modal('show');
-        //     this.form.fill(user);
-        //   },
+            })
+            .catch(() =>{
+              this.$Progress.fail(); 
+            })
+          },
+          editModal(user){
+            this.editMode = true;
+            this.form.reset();
+            $('#addNew').modal('show');
+            this.form.fill(user);
+          },
           newModal(){
             this.editMode = false;
             this.form.reset();
             $('#addNew').modal('show');
           },
 
-        //   deleteOrder(id){
-        //       Swal.fire({
-        //         title: 'Are you sure?',
-        //         text: "You won't be able to revert this!",
-        //         type: 'warning',
-        //         showCancelButton: true,
-        //         confirmButtonColor: '#3085d6',
-        //         cancelButtonColor: '#d33',
-        //         confirmButtonText: 'Yes, delete it!'
-        //         }).then((result) => {
+          deleteOrder(id){
+              Swal.fire({
+                title: 'Are you sure?',
+                text: "You won't be able to revert this!",
+                type: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Yes, delete it!'
+                }).then((result) => {
 
-        //         //send request to the serve
-        //         if (result.value) {
-        //             this.form.delete('api/order/'+id).then(()=>{                  
-        //                 Swal.fire(
-        //                   'Deleted!',
-        //                   'Your file has been deleted.',
-        //                   'success'
-        //                 ) 
-        //               Fire.$emit('AfterCreate')                
-        //             }).catch(()=> {
-        //               Swal("Failed","There was something wrong.", "warning");
-        //             });
-        //         }
+                //send request to the serve
+                if (result.value) {
+                    this.form.delete('api/order/'+id).then(()=>{                  
+                        Swal.fire(
+                          'Deleted!',
+                          'Your file has been deleted.',
+                          'success'
+                        ) 
+                      Fire.$emit('AfterCreate')                
+                    }).catch(()=> {
+                      Swal("Failed","There was something wrong.", "warning");
+                    });
+                }
                 
-        //       })
-        //   },
+              })
+          },
           loadOrders(){       
             axios.get('api/order').then(({ data }) => (this.orders = data.data));
           },
